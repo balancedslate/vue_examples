@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>My Blog</h1>
+      <button v-on:click="addPost">Add Post</button>
+      <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:title="post.title"
+        v-bind:author="post.author"
+        v-bind:body="post.body"
+      ></blog-post>
+    </div>
+    <script>
+      Vue.component('blog-post', {
+        props: ['title', 'author', 'body'],
+        template: `
+          <article>
+            <h2>{{ title }}</h2>
+            <p>By {{ author }}</p>
+            <p>{{ body }}</p>
+          </article>
+        `
+      });
+
+      new Vue({
+        el: '#app',
+        data: {
+          posts: [
+            { id: 1, title: 'Hello, World!', author: 'John Doe', body: 'This is my first blog post. Welcome to my blog!' },
+            { id: 2, title: 'Vue is Awesome!', author: 'Jane Doe', body: 'I recently started using Vue and I am loving it! It makes building web applications so much easier and more efficient.' },
+          ]
+        },
+        methods: {
+          addPost() {
+            this.posts.push({
+              id: this.posts.length + 1,
+              title: 'New Post',
+              author: 'John Doe',
+              body: 'This is a new post. Click the button to add more posts!'
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

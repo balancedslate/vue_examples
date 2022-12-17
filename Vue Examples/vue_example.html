@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue.js Example</title>
+  </head>
+  <body>
+    <!-- Create a root element for the Vue app -->
+    <div id="app">
+      <!-- Display the list of items -->
+      <ul>
+        <li v-for="item in items">{{ item }}</li>
+      </ul>
+      <!-- Add a form to allow the user to add new items -->
+      <form v-on:submit.prevent="addItem">
+        <input v-model="newItem" placeholder="Enter a new item">
+        <button type="submit">Add</button>
+      </form>
+    </div>
+
+    <!-- Load the Vue.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Define the Vue app -->
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          items: ['Item 1', 'Item 2', 'Item 3'],
+          newItem: ''
+        },
+        methods: {
+          addItem: function() {
+            // Add the new item to the list
+            this.items.push(this.newItem);
+            // Clear the input field
+            this.newItem = '';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
